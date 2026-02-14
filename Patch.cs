@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using MelonLoader;
 
-namespace UDNFC_Patch
+namespace DNFC-Redux-Project
 {
     public class Patch : MelonMod
     {
