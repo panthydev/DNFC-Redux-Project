@@ -1,9 +1,9 @@
 ﻿using MelonLoader;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using UDNFC_Patch;
+using Patch;
 
-[assembly: MelonInfo(typeof(UDNFC_Patch.Patch), @"
+[assembly: MelonInfo(typeof(Patch.Patch), @"
 
 $$\   $$\ $$$$$$$\  $$\   $$\ $$$$$$$$\  $$$$$$\        $$$$$$$\            $$\               $$\       
 $$ |  $$ |$$  __$$\ $$$\  $$ |$$  _____|$$  __$$\       $$  __$$\           $$ |              $$ |      

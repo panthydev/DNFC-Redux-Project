@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using MelonLoader;
 
-namespace DNFC-Redux-Project
+namespace Patch
 {
+    /*
+     * Scenes are as followed
+     * scene: MainMenu buildIndex: 0
+     * scene: Loading buildIndex: 1
+     * scene: CityGameplay buildIndex: 2
+     */
     public class Patch : MelonMod
     {
         public override void OnEarlyInitializeMelon()
