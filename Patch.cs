@@ -11,6 +11,7 @@ namespace Patch
      */
     public class Patch : MelonMod
     {
+        public bool initalized = false;
         public override void OnEarlyInitializeMelon()
         {
             MelonLogger.Msg("From everyone at the DNFC Redux Project, we thank you for choosing our mod!");
@@ -18,7 +19,12 @@ namespace Patch
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            MelonLogger.Msg($"Scene {sceneName} was loaded with build index {buildIndex}."); // Allows scene to be debugged
+            if(sceneName == "CityGameplay" && !initalized)
+            {
+                initalized = true;
+                MelonLogger.Msg("Initializing UDNFC...");
+            }
         }
+
     }
 }
