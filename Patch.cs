@@ -12,7 +12,7 @@ namespace UDNFC_Patch
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            MelonLogger.Msg($"Scene {sceneName} was loaded with build index {buildIndex}.");
+            MelonLogger.Msg($"Scene {sceneName} was loaded with build index {buildIndex}."); // Allows scene to be debugged
         }
     }
 }
