@@ -1,30 +1,69 @@
 ﻿using UnityEngine;
 using MelonLoader;
+using System.Collections;
+using DNFC_Redux_Library;
 
 namespace Patch
 {
-    /*
-     * Scenes are as followed
-     * scene: MainMenu buildIndex: 0
-     * scene: Loading buildIndex: 1
-     * scene: CityGameplay buildIndex: 2
-     */
     public class Patch : MelonMod
     {
-        public bool initalized = false;
+        public readonly Library DNFC_Lib = new Library();
+
         public override void OnEarlyInitializeMelon()
         {
-            MelonLogger.Msg("From everyone at the DNFC Redux Project, we thank you for choosing our mod!");
+            MelonLogger.Msg(@"
+         _   _ ___  _  _ ___ ___   ___      _      _    
+        | | | |   \| \| | __/ __| | _ \__ _| |_ __| |_  
+        | |_| | |) | .` | _| (__  |  _/ _` |  _/ _| ' \ 
+         \___/|___/|_|\_|_| \___| |_| \__,_|\__\__|_||_|
+
+    From everyone at the DNFC Redux Project, we hope you enjoy 
+    this mod and the work we've put into it. If you have any questions, 
+    suggestions, or want to contribute, feel free to join our Discord server!");
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            if(sceneName == "CityGameplay" && !initalized)
+            if (sceneName == "MainMenu")
             {
-                initalized = true;
-                MelonLogger.Msg("Initializing UDNFC...");
+                DNFC_Lib.SetIsInMainMenu(true);
+            }
+            else if (sceneName == "Loading")
+            {
+                DNFC_Lib.SetIsInMainMenu(false);
+                DNFC_Lib.SetIsInLoading(true);
+            }
+            else if (sceneName == "CityGameplay")
+            {
+                if (!DNFC_Lib.IsInitialized())
+                {
+                    DNFC_Lib.SetInitialized(true);
+                    MelonLogger.Msg("Mod has been initialized");
+                }
+                DNFC_Lib.FindSettingsManager();
+
+                // Check if the SettingsManager GameObject was found
+                if (DNFC_Lib.GetSettingsManager() == null)
+                {
+                    MelonLogger.Error("SettingsManager GameObject not found in the scene!");
+                    return;
+                }
+
+                // Check if the SettingsManager component was found on the SettingsManager GameObject
+                if (DNFC_Lib.GetSettingsManager().GetComponent("SettingsManager") == null)
+                {
+                    MelonLogger.Error("SettingsManager component not found on the SettingsManager GameObject!");
+                    return;
+                }
             }
         }
 
+        public override void OnUpdate()
+        {
+            if (DNFC_Lib.IsInitialized())
+            {
+                DNFC_Lib.GetActiveInHierarchy(DNFC_Lib.GetSettingsManager());
+            }
+        }
     }
 }
