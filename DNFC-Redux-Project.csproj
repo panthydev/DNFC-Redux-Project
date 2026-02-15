@@ -34,6 +34,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\Downloads\Il2CppDumper-net6-win-v6.7.46\DFNC_Decompiled\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="DNFC_Redux_Library">
+      <HintPath>..\DNFC-Redux-Project-Library\bin\Debug\DNFC_Redux_Library.dll</HintPath>
+    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>..\..\..\..\..\Games\DefinitelyNotFriedChpP6vn\MelonLoader\net6\MelonLoader.dll</HintPath>
     </Reference>

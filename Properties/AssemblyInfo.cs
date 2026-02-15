@@ -3,16 +3,5 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using Patch;
 
-[assembly: MelonInfo(typeof(Patch.Patch), @"
-
-$$\   $$\ $$$$$$$\  $$\   $$\ $$$$$$$$\  $$$$$$\        $$$$$$$\            $$\               $$\       
-$$ |  $$ |$$  __$$\ $$$\  $$ |$$  _____|$$  __$$\       $$  __$$\           $$ |              $$ |      
-$$ |  $$ |$$ |  $$ |$$$$\ $$ |$$ |      $$ /  \__|      $$ |  $$ |$$$$$$\ $$$$$$\    $$$$$$$\ $$$$$$$\  
-$$ |  $$ |$$ |  $$ |$$ $$\$$ |$$$$$\    $$ |            $$$$$$$  |\____$$\\_$$  _|  $$  _____|$$  __$$\ 
-$$ |  $$ |$$ |  $$ |$$ \$$$$ |$$  __|   $$ |            $$  ____/ $$$$$$$ | $$ |    $$ /      $$ |  $$ |
-$$ |  $$ |$$ |  $$ |$$ |\$$$ |$$ |      $$ |  $$\       $$ |     $$  __$$ | $$ |$$\ $$ |      $$ |  $$ |
-\$$$$$$  |$$$$$$$  |$$ | \$$ |$$ |      \$$$$$$  |      $$ |     \$$$$$$$ | \$$$$  |\$$$$$$$\ $$ |  $$ |
- \______/ \_______/ \__|  \__|\__|       \______/       \__|      \_______|  \____/  \_______|\__|  \__|
-
-", "0.0.0", "DNFC Redux Project")]//MelonInfo(typeof(ClassOfMod), "Game Mod Name", "Version", "Author")
-[assembly: MelonGame("Dope Games", "DNFC")] //MelonGame("Studio", "Game")]
+[assembly: MelonInfo(typeof(Patch.Patch), "UDNFC Patch", "1.0.0", "DNFC Redux Project")]
+[assembly: MelonGame("Dope Games", "DNFC")]
