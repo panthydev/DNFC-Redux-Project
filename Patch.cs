@@ -40,29 +40,14 @@ namespace Patch
                     DNFC_Lib.SetInitialized(true);
                     MelonLogger.Msg("Mod has been initialized");
                 }
-                DNFC_Lib.FindSettingsManager();
+                DNFC_Lib.FindSettingsManagerComponent();
 
                 // Check if the SettingsManager GameObject was found
-                if (DNFC_Lib.GetSettingsManager() == null)
+                if (DNFC_Lib.GetSettingsManagerComponent() == null)
                 {
                     MelonLogger.Error("SettingsManager GameObject not found in the scene!");
                     return;
                 }
-
-                // Check if the SettingsManager component was found on the SettingsManager GameObject
-                if (DNFC_Lib.GetSettingsManager().GetComponent("SettingsManager") == null)
-                {
-                    MelonLogger.Error("SettingsManager component not found on the SettingsManager GameObject!");
-                    return;
-                }
-            }
-        }
-
-        public override void OnUpdate()
-        {
-            if (DNFC_Lib.IsInitialized())
-            {
-                DNFC_Lib.GetActiveInHierarchy(DNFC_Lib.GetSettingsManager());
             }
         }
     }
