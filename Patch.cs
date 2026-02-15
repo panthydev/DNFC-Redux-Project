@@ -2,10 +2,14 @@
 using MelonLoader;
 using System.Collections;
 using DNFC_Redux_Library;
+<<<<<<< HEAD
 using UnityEngine.InputSystem;
 
 // 10ms is wait time
 
+=======
+//testing comment
+>>>>>>> 54dfaec050ee9c599a3f2b30706d4a33e01430f1
 namespace Patch
 {
     public class Patch : MelonMod
