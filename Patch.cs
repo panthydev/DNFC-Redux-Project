@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using MelonLoader;
-using System.Collections;
 using DNFC_Redux_Library;
-<<<<<<< HEAD
 using UnityEngine.InputSystem;
 
 // 10ms is wait time
 
-=======
-//testing comment
->>>>>>> 54dfaec050ee9c599a3f2b30706d4a33e01430f1
 namespace Patch
 {
     public class Patch : MelonMod
@@ -50,8 +45,6 @@ namespace Patch
                 {
                     DNFC_Lib.SetInitialized(true);
                     MelonLogger.Msg("Mod has been initialized");
-                    
-                    MelonLogger.Msg("Sleeping finished, starting to find components");
                 }
             }
         }
@@ -70,14 +63,27 @@ namespace Patch
 
                     if (ms == 11 && componentsSearched == false)
                     {
-                        DNFC_Lib.FindCharactersInUse();
+                        DNFC_Lib.GetAllWorkers();
                         DNFC_Lib.FindSettingsManagerComponent();
                         componentsSearched = true;
+                        MelonLogger.Msg("All components have been successfully loaded.");
                     }
+                }
+
+                // Code going here will ensure that components have been found
+                if (componentsSearched == true)
+                {
+                    DNFC_Lib.CheckWorkerCount();
                 }
                 if (Keyboard.current.zKey.wasPressedThisFrame)
                 {
                     // Debug for checking if values are as expected
+                    DNFC_Lib.GetWorker();
+                }
+                if (Keyboard.current.xKey.wasPressedThisFrame)
+                {
+                    MelonLogger.Msg($"Worker List Count: {DNFC_Lib.GetWorkerListCount()}");
+                    MelonLogger.Msg($"Worker Count: {DNFC_Lib.GetWorkerCount()}");
                 }
             }
         }

@@ -34,8 +34,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>Libs\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="DNFC_Redux_Library">
-      <HintPath>Libs\DNFC_Redux_Library.dll</HintPath>
+    <Reference Include="DNFC_Redux_Library, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DNFC_Redux_Library.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>Libs\MelonLoader.dll</HintPath>
