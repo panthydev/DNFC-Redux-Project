@@ -31,15 +31,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DNFC.Mods.Library.1.0.2\lib\net472\Assembly-CSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TextMeshPro, Version=1.0.2.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+	  <Reference Include="Assembly-CSharp, Version=1.0.2.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="DNFC_Redux_Library, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DNFC_Redux_Library.dll</HintPath>
+	  <Reference Include="Il2Cppmscorlib">
+		  <HintPath>Libs\Il2Cppmscorlib.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.UIModule">
+		  <HintPath>Libs\UnityEngine.UIModule.dll</HintPath>
+	  </Reference>
+	  <Reference Include="UnityEngine.UI">
+		  <HintPath>Libs\UnityEngine.UI.dll</HintPath>
+	  </Reference>
+	  <Reference Include="DNFC_Redux_Library, Version=1.0.2.0, Culture=neutral, processorArchitecture=AMD64">
+		  <SpecificVersion>False</SpecificVersion>
+		  <HintPath>..\DNFC-Redux-Project-Library\bin\Debug\net472\DNFC_Redux_Library.dll</HintPath>
+	  </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\..\..\..\..\Games\DefinitelyNotFriedChpP6vn\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="MelonLoader">
-      <HintPath>Libs\MelonLoader.dll</HintPath>
+    <Reference Include="MelonLoader, Version=0.7.1.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\DNFC.Mods.Library.1.0.2\lib\net472\MelonLoader.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,27 +75,32 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\Il2CppDumper-net6-win-v6.7.46\DFNC_Decompiled\Unity.InputSystem.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>Libs\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DNFC.Mods.Library.1.0.2\lib\net472\UnityEngine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DNFC.Mods.Library.1.0.2\lib\net472\UnityEngine.CoreModule.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>Libs\UnityEngine.InputLegacyModule.dll</HintPath>
+    <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DNFC.Mods.Library.1.0.2\lib\net472\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Libs\Assembly-CSharp.dll" />
-    <Content Include="Libs\DNFC_Redux_Library.dll" />
     <Content Include="Libs\MelonLoader.dll" />
     <Content Include="Libs\UnityEngine.CoreModule.dll" />
     <Content Include="Libs\UnityEngine.dll" />
     <Content Include="Libs\UnityEngine.InputLegacyModule.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

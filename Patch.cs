@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+﻿using DNFC_Redux_Library;
+using Il2Cpp;
 using MelonLoader;
-using DNFC_Redux_Library;
+using UnityEngine;
 using UnityEngine.InputSystem;
-
-// 10ms is wait time
+using UnityEngine.SceneManagement;
 
 namespace Patch
 {
     public class Patch : MelonMod
     {
-        int ms = 0;
-        public readonly Library DNFC_Lib = new Library();
-        public bool componentsSearched = false;
+        public EconomyLib _economyLib;
+        public UIManager _uiManager;
+        private GameObject _pauseMenu;
 
         public override void OnEarlyInitializeMelon()
         {
@@ -20,70 +20,86 @@ namespace Patch
         | | | |   \| \| | __/ __| | _ \__ _| |_ __| |_  
         | |_| | |) | .` | _| (__  |  _/ _` |  _/ _| ' \ 
          \___/|___/|_|\_|_| \___| |_| \__,_|\__\__|_||_|
-
     From everyone at the DNFC Redux Project, we hope you enjoy 
     this mod and the work we've put into it. If you have any questions, 
     suggestions, or want to contribute, feel free to join our Discord server!");
         }
 
-        public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+        public override void OnInitializeMelon()
         {
-            if (sceneName == "MainMenu")
-            {
-                DNFC_Lib.SetIsInMainMenu(true);
-                MelonLogger.Msg($"IsInMainMenu: {DNFC_Lib.IsInMainMenu()}");
-            }
-            else if (sceneName == "Loading")
-            {
-                DNFC_Lib.SetIsInMainMenu(false);
-                MelonLogger.Msg($"IsInLoading: {DNFC_Lib.IsInLoading()}");
-                DNFC_Lib.SetIsInLoading(true);
-            }
-            else if (sceneName == "CityGameplay")
-            {
-                if (!DNFC_Lib.IsInitialized())
-                {
-                    DNFC_Lib.SetInitialized(true);
-                    MelonLogger.Msg("Mod has been initialized");
-                }
-            }
+            _economyLib = new EconomyLib();
+            _uiManager = new UIManager();
         }
 
         public override void OnUpdate()
         {
-            // If the player is in the game and the mod is initialized
-            if (DNFC_Lib.IsInitialized() == true)
+            // Pause menu button check
+            if (_pauseMenu != null && _pauseMenu.activeSelf && _uiManager.MainMenuButton != null)
             {
-                // This section is critical to ensure all components are loaded before reading them in
+                if (UnityEngine.Input.GetMouseButtonDown(0))
                 {
-                    if (ms != 11)    // Wait 11ms before finding components to ensure game has loaded them in.
+                    var buttonRect = _uiManager.MainMenuButton.GetComponent<RectTransform>();
+                    if (RectTransformUtility.RectangleContainsScreenPoint(buttonRect, UnityEngine.Input.mousePosition))
                     {
-                        ms++;
-                    }
-
-                    if (ms == 11 && componentsSearched == false)
-                    {
-                        DNFC_Lib.GetAllWorkers();
-                        DNFC_Lib.FindSettingsManagerComponent();
-                        componentsSearched = true;
-                        MelonLogger.Msg("All components have been successfully loaded.");
+                        MelonLogger.Msg("Main Menu button clicked!");
+                        SceneManager.LoadScene("MainMenu");
                     }
                 }
+            }
 
-                // Code going here will ensure that components have been found
-                if (componentsSearched == true)
+            // All debug keys are gated behind Developer Mode.
+            // Toggle Developer Mode with Ctrl+Shift+D.
+            if (!CoreLib.DeveloperMode)
+                return;
+
+            // X key — placeholder for character component debugging.
+            // TODO: Implement GetWorkerCharacterComponent in EmployeeLib and call it here.
+            if (Keyboard.current.xKey.wasPressedThisFrame)
+            {
+                MelonLogger.Msg("[DEV] X key pressed — GetWorkerCharacterComponent not yet implemented in EmployeeLib.");
+            }
+
+            if (Keyboard.current.bKey.wasPressedThisFrame)
+            {
+                _economyLib.GetBankBalance();
+                _economyLib.AddBankBalance(1000000);
+            }
+
+            if (Keyboard.current.mKey.wasPressedThisFrame)
+            {
+                MelonLogger.Msg("M pressed - attempting scene load");
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
+
+        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
+        {
+            _pauseMenu = GameObject.Find("UI_Gameplay/Canvas/Panel_Settings");
+
+            if (sceneName == "CityGameplay")
+            {
+                _uiManager.InjectPauseMenuButtons();
+
+                var inputManager = InputManager.Instance;
+                if (inputManager != null)
                 {
-                    DNFC_Lib.CheckWorkerCount();
+                    inputManager.ResetControls();
+                    MelonLogger.Msg("InputManager: Controls reset.");
                 }
-                if (Keyboard.current.zKey.wasPressedThisFrame)
+                else
                 {
-                    // Debug for checking if values are as expected
-                    DNFC_Lib.GetWorker();
+                    MelonLogger.Msg("InputManager: Instance not found.");
                 }
-                if (Keyboard.current.xKey.wasPressedThisFrame)
+
+                var loadingDisplay = GameObject.FindObjectOfType<LoadingDisplay>();
+                if (loadingDisplay != null)
                 {
-                    MelonLogger.Msg($"Worker List Count: {DNFC_Lib.GetWorkerListCount()}");
-                    MelonLogger.Msg($"Worker Count: {DNFC_Lib.GetWorkerCount()}");
+                    loadingDisplay.CloseLoading();
+                    MelonLogger.Msg("LoadingDisplay closed.");
+                }
+                else
+                {
+                    MelonLogger.Msg("LoadingDisplay not found.");
                 }
             }
         }
